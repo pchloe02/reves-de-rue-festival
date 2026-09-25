@@ -1,0 +1,156 @@
+[
+  {
+    "id": 1,
+    "titre": "Lorem ipsum dolor sit amet",
+    "type": "fresque live",
+    "date": "2026-09-22",
+    "heureDebut": "10:00",
+    "duree": 240,
+    "lieu": "Mur de l'ancienne halle, rue des Tanneurs",
+    "image": "https://picsum.photos/seed/baleine/900/600",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.",
+    "artistes": [
+      1
+    ],
+    "phare": false
+  },
+  {
+    "id": 2,
+    "titre": "Consectetur adipiscing elit",
+    "type": "atelier participatif",
+    "date": "2026-09-22",
+    "heureDebut": "14:00",
+    "duree": 90,
+    "lieu": "Tente des ateliers, place du Marché",
+    "image": "https://picsum.photos/seed/surreal/900/600",
+    "description": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
+    "artistes": [
+      5
+    ],
+    "phare": true
+  },
+  {
+    "id": 3,
+    "titre": "Sed do eiusmod tempor",
+    "type": "fresque live",
+    "date": "2026-09-22",
+    "heureDebut": "15:30",
+    "duree": 180,
+    "lieu": "Passage Saint-Jean",
+    "image": "https://picsum.photos/seed/couloir/900/600",
+    "description": "Sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
+    "artistes": [
+      3
+    ],
+    "phare": true
+  },
+  {
+    "id": 4,
+    "titre": "Incididunt ut labore",
+    "type": "performance",
+    "date": "2026-09-22",
+    "heureDebut": "21:30",
+    "duree": 60,
+    "lieu": "Façade de la mairie",
+    "image": "https://picsum.photos/seed/somnambules/900/600",
+    "description": "Totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit.",
+    "artistes": [
+      2,
+      4
+    ],
+    "phare": false
+  },
+  {
+    "id": 5,
+    "titre": "Et dolore magna aliqua",
+    "type": "atelier participatif",
+    "date": "2026-09-23",
+    "heureDebut": "10:30",
+    "duree": 120,
+    "lieu": "Palissade du square Voltaire",
+    "image": "https://picsum.photos/seed/villereve/900/600",
+    "description": "Aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum.",
+    "artistes": [
+      1,
+      5
+    ],
+    "phare": true
+  },
+  {
+    "id": 6,
+    "titre": "Ut enim ad minim veniam",
+    "type": "performance",
+    "date": "2026-09-23",
+    "heureDebut": "16:00",
+    "duree": 75,
+    "lieu": "Départ devant l'office de tourisme",
+    "image": "https://picsum.photos/seed/visite/900/600",
+    "description": "Quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.",
+    "artistes": [
+      4
+    ],
+    "phare": false
+  },
+  {
+    "id": 7,
+    "titre": "Quis nostrud exercitation",
+    "type": "fresque live",
+    "date": "2026-09-23",
+    "heureDebut": "14:00",
+    "duree": 300,
+    "lieu": "Escaliers de la rue Haute",
+    "image": "https://picsum.photos/seed/anamorphose/900/600",
+    "description": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur.",
+    "artistes": [
+      3
+    ],
+    "phare": true
+  },
+  {
+    "id": 8,
+    "titre": "Ullamco laboris nisi",
+    "type": "performance",
+    "date": "2026-09-23",
+    "heureDebut": "22:00",
+    "duree": 90,
+    "lieu": "Berges du canal",
+    "image": "https://picsum.photos/seed/lucioles/900/600",
+    "description": "Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas.",
+    "artistes": [
+      6
+    ],
+    "phare": true
+  },
+  {
+    "id": 9,
+    "titre": "Aliquip ex ea commodo",
+    "type": "atelier participatif",
+    "date": "2026-09-24",
+    "heureDebut": "11:00",
+    "duree": 90,
+    "lieu": "Tente des ateliers, place du Marché",
+    "image": "https://picsum.photos/seed/pochoir/900/600",
+    "description": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias.",
+    "artistes": [
+      5,
+      6
+    ],
+    "phare": true
+  },
+  {
+    "id": 10,
+    "titre": "Duis aute irure dolor",
+    "type": "performance",
+    "date": "2026-09-24",
+    "heureDebut": "18:00",
+    "duree": 45,
+    "lieu": "Place du Marché",
+    "image": "https://picsum.photos/seed/reveil/900/600",
+    "description": "Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.",
+    "artistes": [
+      4,
+      6
+    ],
+    "phare": false
+  }
+]

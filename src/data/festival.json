@@ -1,0 +1,86 @@
+{
+  "nom": "Rêves de rue",
+  "dates": "22-24 Septembre",
+  "lieu": "Le grand parc de la ville",
+  "image": "https://picsum.photos/seed/revesderue-hero/1800/1100",
+  "description": "Festival d'art urbain sur le rêve et la métamorphose visuelle de la ville, organisé par l'association Troi3.",
+  "infosPratiques": [
+    {
+      "titre": "Lieu & accès",
+      "texte": "Jardin du Luxembourg et rues adjacentes (Paris 6ᵉ), RER B (Luxembourg), Métro 4 (Saint-Sulpice ou Odéon) et Métro 10 (Mabillon)."
+    },
+    {
+      "titre": "Les stands",
+      "texte": "Tous les stands et activités sont installés directement dans l'enceinte du jardin."
+    },
+    {
+      "titre": "Tarifs",
+      "texte": "Entrée libre et gratuite pour l'ensemble du public."
+    },
+    {
+      "titre": "Horaires",
+      "texte": "Samedi 19 septembre et dimanche 20 septembre de 10 h à 19 h."
+    },
+    {
+      "titre": "Accès",
+      "texte": "Entrées principales par la place Edmond-Rostand et le boulevard Saint-Michel - Accès PMR garanti."
+    }
+  ],
+  "carte": "https://www.openstreetmap.org/export/embed.html?bbox=2.3314%2C48.8423%2C2.3434%2C48.8503&layer=mapnik&marker=48.8463%2C2.3374",
+  "partenaires": [
+    {
+      "nom": "Métropole Grand Lyon",
+      "logo": "/images/partenaires/metropole-grand-lyon.png"
+    },
+    {
+      "nom": "Villefranche Agglomération",
+      "logo": "/images/partenaires/villefranche-agglomeration.png"
+    },
+    {
+      "nom": "Villefranche",
+      "logo": "/images/partenaires/villefranche-sur-saone.png"
+    },
+    {
+      "nom": "Plattard SAS",
+      "logo": "/images/partenaires/plattard-sas.png"
+    },
+    {
+      "nom": "Alliade Habitat",
+      "logo": "/images/partenaires/alliade-habitat.png"
+    },
+    {
+      "nom": "Institut Français",
+      "logo": "/images/partenaires/institut-francais.png"
+    },
+    {
+      "nom": "Alliance Française",
+      "logo": "/images/partenaires/alliance-francaise.png"
+    },
+    {
+      "nom": "Givors",
+      "logo": "/images/partenaires/givors.png"
+    },
+    {
+      "nom": "Ville de Lyon",
+      "logo": "/images/partenaires/ville-de-lyon.png"
+    }
+  ],
+  "reseaux": [
+    {
+      "nom": "Facebook",
+      "lien": "#"
+    },
+    {
+      "nom": "Instagram",
+      "lien": "#"
+    },
+    {
+      "nom": "YouTube",
+      "lien": "#"
+    },
+    {
+      "nom": "LinkedIn",
+      "lien": "#"
+    }
+  ]
+}

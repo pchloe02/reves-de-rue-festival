@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "nom": "Lune Varenne",
+    "discipline": "Fresquiste",
+    "bio": "Lune Varenne peint des animaux géants qui semblent s'être endormis sur les murs de la ville. Elle travaille à la bombe et au rouleau depuis plus de dix ans, entre Lyon et Marseille."
+  },
+  {
+    "id": 2,
+    "nom": "Collectif Somnambule",
+    "discipline": "Mapping vidéo",
+    "bio": "Le Collectif Somnambule, ce sont trois vidéastes qui projettent des rêves sur les façades. Leurs créations mélangent images filmées, dessin animé et musique live."
+  },
+  {
+    "id": 3,
+    "nom": "Oscar Mirt",
+    "discipline": "Trompe-l'œil et anamorphose",
+    "bio": "Oscar Mirt crée des illusions au sol et sur les escaliers, qui ne se révèlent que depuis un point de vue précis."
+  },
+  {
+    "id": 4,
+    "nom": "Inès Kahlo-Diaz",
+    "discipline": "Performance vivante",
+    "bio": "Danseuse et conteuse, Inès Kahlo-Diaz fait vivre les fresques en racontant les histoires qu'elles cachent."
+  },
+  {
+    "id": 5,
+    "nom": "Troi3 Médiation",
+    "discipline": "Ateliers pédagogiques",
+    "bio": "L'équipe de médiation de l'association Troi3 anime des ateliers pour faire découvrir l'art urbain aux petits comme aux grands."
+  },
+  {
+    "id": 6,
+    "nom": "Nox & Pollen",
+    "discipline": "Street art lumineux",
+    "bio": "Nox & Pollen est un duo qui peint avec de la lumière : peintures phosphorescentes, néons et capteurs qui réagissent au public."
+  }
+]
