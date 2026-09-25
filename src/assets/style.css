@@ -263,9 +263,9 @@ h3 {
   color: var(--color-btn-secondary-text-pressed);
 }
 .bouton-secondaire.actif {
-  background: var(--blue-sky-600);
-  color: var(--mustard-white-50);
-  border-color: var(--blue-sky-600);
+  background: var(--color-btn-secondary-bg-pressed);
+  color: var(--color-btn-secondary-text-pressed);
+  border-color: var(--color-btn-secondary-text-pressed);
 }
 
 .bouton-lien {
