@@ -5,9 +5,14 @@ function versDate(dateTexte) {
   return new Date(dateTexte + 'T00:00:00')
 }
 
+export function formaterJourMois(dateTexte) {
+  const d = versDate(dateTexte)
+  return d.getDate() + ' ' + mois[d.getMonth()]
+}
+
 export function formaterDateLongue(dateTexte) {
   const d = versDate(dateTexte)
-  return d.getDate() + ' ' + mois[d.getMonth()] + ' ' + d.getFullYear()
+  return formaterJourMois(dateTexte) + ' ' + d.getFullYear()
 }
 
 export function formaterDateBouton(dateTexte) {
@@ -30,4 +35,23 @@ export function formaterHeure(heure) {
     return parseInt(morceaux[0]) + 'h'
   }
   return parseInt(morceaux[0]) + 'h' + morceaux[1]
+}
+
+export function premierePhrase(texte) {
+  const position = texte.indexOf('. ')
+  if (position === -1) {
+    return texte
+  }
+  return texte.slice(0, position + 1)
+}
+
+export function heureDeFin(heureDebut, duree) {
+  const morceaux = heureDebut.split(':')
+  const total = parseInt(morceaux[0]) * 60 + parseInt(morceaux[1]) + duree
+  const h = Math.floor(total / 60) % 24
+  const m = total % 60
+  if (m === 0) {
+    return h + 'h'
+  }
+  return h + 'h' + (m < 10 ? '0' + m : m)
 }

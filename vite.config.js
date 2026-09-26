@@ -1,8 +1,10 @@
-import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import { defineConfig } from 'vitest/config'
 
-// config de base copiée de la doc de Vite
 export default defineConfig({
   base: '/reves-de-rue-festival/',
   plugins: [vue()],
+  test: {
+    environment: 'jsdom',
+  },
 })

@@ -79,6 +79,17 @@ export const useEvenementsStore = defineStore('evenements', () => {
     filtres.value[nom] = valeur
   }
 
+  function trouverEvenement(id) {
+    return evenements.value.find((e) => e.id === Number(id))
+  }
+
+  function suggestionsPour(evenement) {
+    const autres = evenementsTries.value.filter((e) => e.id !== evenement.id)
+    const memeType = autres.filter((e) => e.type === evenement.type)
+    const pasMemeType = autres.filter((e) => e.type !== evenement.type)
+    return memeType.concat(pasMemeType).slice(0, 5)
+  }
+
   return {
     festival,
     filtres,
@@ -88,5 +99,8 @@ export const useEvenementsStore = defineStore('evenements', () => {
     evenementsFiltres,
     evenementsParJour,
     changerFiltre,
+    trouverEvenement,
+    artistesDe,
+    suggestionsPour,
   }
 })

@@ -1,0 +1,30 @@
+:root {
+  --spacing-000: 0px;
+  --spacing-050: 2px;
+  --spacing-100: 4px;
+  --spacing-150: 6px;
+  --spacing-200: 8px;
+  --spacing-300: 12px;
+  --spacing-400: 16px;
+  --spacing-600: 24px;
+  --spacing-800: 32px;
+  --spacing-1000: 40px;
+
+  --radius-000: 0px;
+  --radius-050: 2px;
+  --radius-100: 4px;
+  --radius-150: 6px;
+  --radius-200: 8px;
+  --radius-300: 12px;
+  --radius-400: 16px;
+  --radius-500: 20px;
+  --radius-600: 24px;
+  --radius-700: 48px;
+
+  --border-width-000: 0px;
+  --border-width-050: 1px;
+  --border-width-100: 2px;
+  --border-width-125: 4px;
+
+  --hors-ds-radius-button: 53px;
+}

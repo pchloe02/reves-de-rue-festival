@@ -1,0 +1,69 @@
+.bouton {
+  font-family: var(--hors-ds-font-family-button);
+  font-size: var(--font-size-large);
+  text-transform: uppercase;
+  padding: var(--spacing-300) 28px;
+  border-radius: var(--hors-ds-radius-button);
+  border: var(--border-width-050) solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.bouton-primaire {
+  background: var(--color-btn-primary-bg-default);
+  color: var(--color-btn-primary-text-default);
+  border-color: var(--color-btn-primary-bg-default);
+}
+.bouton-primaire:hover {
+  background: var(--color-btn-primary-bg-hover);
+  color: var(--color-btn-primary-text-hover);
+  border-color: var(--color-btn-primary-bg-hover);
+}
+.bouton-primaire:active {
+  background: var(--color-btn-primary-bg-pressed);
+  color: var(--color-btn-primary-text-pressed);
+  border-color: var(--color-btn-primary-bg-pressed);
+}
+.bouton-primaire.actif {
+  background: var(--color-btn-primary-bg-active);
+  color: var(--color-btn-primary-text-active);
+  border-color: var(--color-btn-primary-bg-active);
+}
+.bouton-primaire:focus-visible {
+  outline-color: var(--color-btn-primary-bg-focus);
+}
+
+.bouton-secondaire {
+  background: var(--color-btn-secondary-bg-default);
+  color: var(--color-btn-secondary-text-default);
+  border-color: var(--color-btn-secondary-text-default);
+}
+.bouton-secondaire:hover {
+  background: var(--color-btn-secondary-bg-hover);
+  color: var(--color-btn-secondary-text-hover);
+  border-color: var(--color-btn-secondary-text-hover);
+}
+.bouton-secondaire:active {
+  background: var(--color-btn-secondary-bg-pressed);
+  color: var(--color-btn-secondary-text-pressed);
+}
+.bouton-secondaire.actif {
+  background: var(--color-btn-secondary-bg-pressed);
+  color: var(--color-btn-secondary-text-pressed);
+  border-color: var(--color-btn-secondary-text-pressed);
+}
+.bouton-secondaire:focus-visible {
+  outline-color: var(--color-btn-secondary-bg-focus);
+}
+
+.bouton-lien {
+  background: var(--color-btn-link-text-default);
+  color: var(--color-btn-link-text-text);
+}
+.bouton-lien:hover {
+  background: var(--color-btn-link-text-hover);
+}
+.bouton-lien:active {
+  background: var(--color-btn-link-text-pressed);
+}
