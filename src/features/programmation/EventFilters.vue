@@ -1,5 +1,5 @@
 <script setup>
-import { formaterDateBouton } from '../helpers.js'
+import { formaterDateBouton } from '../../helpers.js'
 
 const props = defineProps({
   filtres: {

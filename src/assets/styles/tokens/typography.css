@@ -1,0 +1,31 @@
+:root {
+  --font-family-display: 'Outfit', Arial, sans-serif;
+  --font-family-brand: 'Cyberbang', 'Outfit', Arial, sans-serif;
+  --font-family-headings: 'Inter', Arial, sans-serif;
+  --font-family-body: 'Inter', Arial, sans-serif;
+
+  --font-weight-regular: 400;
+  --font-weight-semi-bold: 600;
+  --font-weight-bold: 700;
+
+  --font-size-brand: 98px;
+  --font-size-display: 56px;
+  --font-size-heading-1: 40px;
+  --font-size-heading-2: 32px;
+  --font-size-heading-3: 24px;
+  --font-size-large: 18px;
+  --font-size-medium: 16px;
+  --font-size-small: 14px;
+  --font-size-label: 12px;
+
+  --line-height-display: 44px;
+  --line-height-heading-1: 38px;
+  --line-height-heading-2: 32px;
+  --line-height-heading-3: 30px;
+  --line-height-large: 28px;
+  --line-height-medium: 20px;
+  --line-height-small: 16px;
+  --line-height-label: 14px;
+
+  --hors-ds-font-family-button: 'Chivo', Arial, sans-serif;
+}

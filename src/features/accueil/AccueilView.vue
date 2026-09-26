@@ -1,6 +1,6 @@
 <script setup>
-import EventCardPetite from '../components/EventCardPetite.vue'
-import { useEvenementsStore } from '../stores/evenements.js'
+import EventCardPetite from '../../components/EventCardPetite.vue'
+import { useEvenementsStore } from '../../stores/evenements.js'
 
 const store = useEvenementsStore()
 </script>

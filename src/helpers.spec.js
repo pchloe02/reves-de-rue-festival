@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { formaterHeure, jourEtMois, formaterDateLongue, formaterDateBouton } from './helpers.js'
+import { formaterHeure, jourEtMois, formaterDateLongue, formaterDateBouton, premierePhrase } from './helpers.js'
 
 describe('formaterHeure', () => {
   it('enlève les minutes quand elles sont à 00', () => {
@@ -30,5 +30,15 @@ describe('formaterDateLongue', () => {
 describe('formaterDateBouton', () => {
   it('écrit une date courte pour les boutons', () => {
     expect(formaterDateBouton('2026-09-22')).toBe('22 sept 2026')
+  })
+})
+
+describe('premierePhrase', () => {
+  it('coupe le texte après la première phrase', () => {
+    expect(premierePhrase('Une fresque en direct. Venez nombreux.')).toBe('Une fresque en direct.')
+  })
+
+  it('renvoie tout le texte quand il n’y a qu’une phrase', () => {
+    expect(premierePhrase('Une seule phrase.')).toBe('Une seule phrase.')
   })
 })

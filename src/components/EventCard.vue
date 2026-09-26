@@ -14,7 +14,7 @@ const date = jourEtMois(props.evenement.date)
 </script>
 
 <template>
-  <article class="carte">
+  <RouterLink :to="{ name: 'evenement', params: { id: evenement.id } }" class="carte">
     <div class="image">
       <img :src="evenement.image" alt="" />
       <div class="date">
@@ -45,19 +45,27 @@ const date = jourEtMois(props.evenement.date)
     </div>
 
     <div class="actions">
+      <svg class="chevron" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="m9 18 6-6-6-6" />
+      </svg>
       <BoutonFavori />
     </div>
-  </article>
+  </RouterLink>
 </template>
 
 <style scoped>
 .carte {
   display: flex;
-  background: var(--hors-ds-card-bg);
+  background: var(--color-bg-surface);
   border-radius: var(--radius-300);
+  box-shadow: 0 4px 4px var(--color-shadow);
   overflow: hidden;
+  text-decoration: none;
   color: var(--color-text-body);
   min-height: 200px;
+}
+.carte:hover h3 {
+  text-decoration: underline;
 }
 
 .image {
@@ -107,6 +115,7 @@ h3 {
   font-size: var(--font-size-heading-2);
   line-height: var(--line-height-heading-2);
   font-weight: var(--font-weight-bold);
+  color: var(--color-text-h2);
 }
 .description {
   margin: 0;
@@ -126,9 +135,14 @@ h3 {
 .actions {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   padding: var(--spacing-400);
+}
+.chevron {
+  margin-top: auto;
+  margin-bottom: auto;
+  color: var(--color-text-h1);
 }
 
 @media (max-width: 640px) {
@@ -143,6 +157,9 @@ h3 {
     flex-direction: row;
     justify-content: flex-end;
     padding-top: 0;
+  }
+  .chevron {
+    display: none;
   }
 }
 </style>

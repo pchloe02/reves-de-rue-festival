@@ -1,9 +1,9 @@
 <script setup>
-import EventCard from '../components/EventCard.vue'
-import EventFilters from '../components/EventFilters.vue'
-import ChoixVue from '../components/ChoixVue.vue'
-import { useEvenementsStore } from '../stores/evenements.js'
-import { formaterDateLongue } from '../helpers.js'
+import EventCard from '../../components/EventCard.vue'
+import EventFilters from './EventFilters.vue'
+import ChoixVue from './ChoixVue.vue'
+import { useEvenementsStore } from '../../stores/evenements.js'
+import { formaterDateLongue } from '../../helpers.js'
 
 const store = useEvenementsStore()
 </script>

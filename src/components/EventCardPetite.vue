@@ -14,7 +14,7 @@ const date = jourEtMois(props.evenement.date)
 </script>
 
 <template>
-  <article class="petite-carte">
+  <RouterLink :to="{ name: 'evenement', params: { id: evenement.id } }" class="petite-carte">
     <div class="image">
       <img :src="evenement.image" alt="" />
       <div class="date">
@@ -43,7 +43,7 @@ const date = jourEtMois(props.evenement.date)
         <BoutonFavori :taille="22" />
       </div>
     </div>
-  </article>
+  </RouterLink>
 </template>
 
 <style scoped>
@@ -52,11 +52,15 @@ const date = jourEtMois(props.evenement.date)
   flex-direction: column;
   width: 260px;
   flex-shrink: 0;
-  background: var(--hors-ds-card-bg);
-  border-radius: var(--radius-200);
+  background: var(--color-bg-surface);
+  border-radius: var(--radius-300);
   overflow: hidden;
+  text-decoration: none;
   color: var(--color-text-body);
-  box-shadow: 0 3px 0 var(--violet-dream-400);
+  box-shadow: 0 4px 4px var(--color-shadow);
+}
+.petite-carte:hover h3 {
+  text-decoration: underline;
 }
 .image {
   position: relative;
@@ -100,6 +104,7 @@ h3 {
   margin: var(--spacing-050) 0;
   font-size: var(--font-size-heading-3);
   line-height: var(--line-height-heading-3);
+  color: var(--color-text-h2);
 }
 .ligne {
   margin: 0;

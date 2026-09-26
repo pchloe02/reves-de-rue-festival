@@ -24,6 +24,9 @@ describe('EventCard', () => {
       props: {
         evenement,
       },
+      global: {
+        stubs: { RouterLink: { template: '<a><slot /></a>' } },
+      },
     })
 
     // ASSERT: vérifier que le rendu correspond à ce que j'attends
@@ -38,6 +41,9 @@ describe('EventCard', () => {
     const wrapper = mount(EventCard, {
       props: {
         evenement,
+      },
+      global: {
+        stubs: { RouterLink: { template: '<a><slot /></a>' } },
       },
     })
 
