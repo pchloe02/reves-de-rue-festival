@@ -1,8 +1,21 @@
 <script setup>
-import EventCardPetite from '../../components/EventCardPetite.vue'
-import { useEvenementsStore } from '../../stores/evenements.js'
+import { onMounted, ref } from "vue";
+import IntervenantCardPetite from "../../components/IntervenantCardPetite.vue";
+import { useEventsStore } from "../../stores/evenements.js";
+import { getAllIntervenants } from "../../api/intervenants.ts";
 
-const store = useEvenementsStore()
+const store = useEventsStore();
+const intervenants = ref([]);
+const erreurIntervenants = ref("");
+
+onMounted(async () => {
+  try {
+    intervenants.value = await getAllIntervenants();
+  } catch (error) {
+    console.error("Erreur lors de la récupération des intervenants :", error);
+    erreurIntervenants.value = "Les intervenants sont momentanément indisponibles.";
+  }
+});
 </script>
 
 <template>
@@ -17,7 +30,9 @@ const store = useEvenementsStore()
           <span>{{ store.festival.lieu }}</span>
         </p>
         <div class="hero-boutons">
-          <RouterLink to="/programmation" class="bouton bouton-hero">Découvrir le programme</RouterLink>
+          <RouterLink to="/programmation" class="bouton bouton-hero"
+            >Découvrir le programme</RouterLink
+          >
           <a href="#" class="bouton bouton-hero">Billetterie</a>
         </div>
       </div>
@@ -28,8 +43,13 @@ const store = useEvenementsStore()
         <h2>Au programme</h2>
         <RouterLink to="/programmation">Voir plus →</RouterLink>
       </div>
-      <div class="defilement">
-        <EventCardPetite v-for="evenement in store.evenementsPhares" :key="evenement.id" :evenement="evenement" />
+      <p v-if="erreurIntervenants" class="erreur">{{ erreurIntervenants }}</p>
+      <div v-else class="defilement">
+        <IntervenantCardPetite
+          v-for="intervenant in intervenants"
+          :key="intervenant.id_intervenant"
+          :intervenant="intervenant"
+        />
       </div>
     </section>
 
@@ -129,6 +149,9 @@ h2 {
   gap: var(--spacing-600);
   overflow-x: auto;
   padding: var(--spacing-600) 0 var(--spacing-400);
+}
+.erreur {
+  color: var(--color-text-secondary);
 }
 
 .infos {

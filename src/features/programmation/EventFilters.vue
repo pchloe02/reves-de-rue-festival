@@ -2,7 +2,7 @@
 import { formaterDateBouton } from '../../helpers.js'
 
 const props = defineProps({
-  filtres: {
+  filters: {
     type: Object,
     required: true,
   },
@@ -12,18 +12,18 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['changer'])
+const emit = defineEmits(['update'])
 
-function clicDate(date) {
-  if (props.filtres.date === date) {
-    emit('changer', 'date', '')
+function handleDateClick(date) {
+  if (props.filters.date === date) {
+    emit('update', 'date', '')
   } else {
-    emit('changer', 'date', date)
+    emit('update', 'date', date)
   }
 }
 
-function tapeRecherche(event) {
-  emit('changer', 'recherche', event.target.value)
+function handleSearchInput(event) {
+  emit('update', 'search', event.target.value)
 }
 </script>
 
@@ -34,9 +34,9 @@ function tapeRecherche(event) {
         v-for="d in dates"
         :key="d"
         class="bouton bouton-secondaire"
-        :class="{ actif: filtres.date === d }"
-        :aria-pressed="filtres.date === d"
-        @click="clicDate(d)"
+        :class="{ actif: filters.date === d }"
+        :aria-pressed="filters.date === d"
+        @click="handleDateClick(d)"
       >
         {{ formaterDateBouton(d) }}
       </button>
@@ -44,7 +44,7 @@ function tapeRecherche(event) {
 
     <label class="recherche">
       <span class="cache">Rechercher un événement</span>
-      <input type="search" placeholder="Search..." :value="filtres.recherche" @input="tapeRecherche" />
+      <input type="search" placeholder="Search..." :value="filters.search" @input="handleSearchInput" />
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
         <circle cx="11" cy="11" r="8" />
         <path d="m21 21-4.3-4.3" />

@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import AccueilView from '../features/accueil/AccueilView.vue'
 import ProgrammationView from '../features/programmation/ProgrammationView.vue'
 import EvenementView from '../features/evenement/EvenementView.vue'
-import { useEvenementsStore } from '../stores/evenements.js'
+import { useEventsStore } from '../stores/evenements.js'
 
 const routes = [
   { path: '/', name: 'accueil', component: AccueilView },
@@ -12,9 +12,12 @@ const routes = [
     name: 'evenement',
     component: EvenementView,
     props: true,
-    beforeEnter: (to) => {
-      const store = useEvenementsStore()
-      if (!store.trouverEvenement(to.params.id)) {
+    beforeEnter: async (to) => {
+      const store = useEventsStore()
+      if (!store.events.length && !store.isLoading) {
+        await store.fetchEvents()
+      }
+      if (!store.findEvent(to.params.id)) {
         return { name: 'programmation' }
       }
     },

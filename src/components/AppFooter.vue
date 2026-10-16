@@ -1,7 +1,7 @@
 <script setup>
-import { useEvenementsStore } from '../stores/evenements.js'
+import { useEventsStore } from '../stores/evenements.js'
 
-const store = useEvenementsStore()
+const store = useEventsStore()
 </script>
 
 <template>

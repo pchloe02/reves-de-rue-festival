@@ -1,11 +1,24 @@
 <script setup>
+import { onMounted, watch } from 'vue'
 import EventCard from '../../components/EventCard.vue'
 import EventFilters from './EventFilters.vue'
 import ChoixVue from './ChoixVue.vue'
-import { useEvenementsStore } from '../../stores/evenements.js'
+import { useEventsStore } from '../../stores/evenements.js'
 import { formaterDateLongue } from '../../helpers.js'
 
-const store = useEvenementsStore()
+const store = useEventsStore()
+
+onMounted(() => {
+  console.log('[Programming] filtered events:', store.filteredEvents)
+})
+
+watch(
+  () => store.filteredEvents,
+  (events) => {
+    console.log('[Programming] filtered events:', events)
+  },
+  { deep: true },
+)
 </script>
 
 <template>
@@ -15,23 +28,26 @@ const store = useEvenementsStore()
       <p>Retrouvez tous les événements du festival, jour par jour.</p>
     </section>
 
-    <EventFilters :filtres="store.filtres" :dates="store.dates" @changer="store.changerFiltre" />
+    <EventFilters :filters="store.filters" :dates="store.dates" @update="store.updateFilter" />
+
+    <p v-if="store.error" class="erreur">{{ store.error }}</p>
+    <p v-else-if="store.isLoading" class="erreur">Chargement des événements…</p>
 
     <div class="barre">
-      <ChoixVue v-model="store.vue" />
+      <ChoixVue v-model="store.viewMode" />
     </div>
 
-    <div v-if="store.vue === 'liste'" class="liste">
-      <EventCard v-for="evenement in store.evenementsFiltres" :key="evenement.id" :evenement="evenement" />
+    <div v-if="store.viewMode === 'liste'" class="liste">
+      <EventCard v-for="event in store.filteredEvents" :key="event.id" :evenement="event" />
     </div>
 
     <div v-else>
-      <section v-for="groupe in store.evenementsParJour" :key="groupe.date" class="jour">
-        <h2 class="pastille-jour">{{ formaterDateLongue(groupe.date) }}</h2>
+      <section v-for="group in store.eventsByDay" :key="group.date" class="jour">
+        <h2 class="pastille-jour">{{ formaterDateLongue(group.date) }}</h2>
         <div class="frise">
-          <div v-for="evenement in groupe.evenements" :key="evenement.id" class="frise-element">
+          <div v-for="event in group.events" :key="event.id" class="frise-element">
             <span class="rond"></span>
-            <EventCard :evenement="evenement" />
+            <EventCard :evenement="event" />
           </div>
         </div>
       </section>
@@ -59,6 +75,10 @@ h1 {
   display: flex;
   justify-content: flex-end;
   margin: var(--spacing-1000) 0 var(--spacing-600);
+}
+
+.erreur {
+  color: var(--color-text-secondary);
 }
 
 .liste {

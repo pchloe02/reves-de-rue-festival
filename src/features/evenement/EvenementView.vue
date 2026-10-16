@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 import EventCardPetite from '../../components/EventCardPetite.vue'
 import BoutonFavori from '../../components/BoutonFavori.vue'
-import { useEvenementsStore } from '../../stores/evenements.js'
+import { useEventsStore } from '../../stores/evenements.js'
 import { formaterJourMois, formaterHeure, premierePhrase } from '../../helpers.js'
 
 const props = defineProps({
@@ -12,22 +12,22 @@ const props = defineProps({
   },
 })
 
-const store = useEvenementsStore()
+const store = useEventsStore()
 
-const evenement = computed(() => store.trouverEvenement(props.id))
+const event = computed(() => store.findEvent(props.id))
 
-const artistes = computed(() => store.artistesDe(evenement.value))
+const artists = computed(() => store.getArtistsForEvent(event.value))
 
-const nomsArtistes = computed(() => artistes.value.map((a) => a.nom).join(', '))
+const artistNames = computed(() => artists.value.map((artist) => artist.nom).join(', '))
 
 const quand = computed(() => {
-  const e = evenement.value
-  return formaterJourMois(e.date) + ' - À partir de ' + formaterHeure(e.heureDebut)
+  const currentEvent = event.value
+  return formaterJourMois(currentEvent.date) + ' - À partir de ' + formaterHeure(currentEvent.heureDebut)
 })
 
-const accroche = computed(() => premierePhrase(evenement.value.description))
+const intro = computed(() => premierePhrase(event.value.description))
 
-const suggestions = computed(() => store.suggestionsPour(evenement.value))
+const suggestions = computed(() => store.getSuggestions(event.value))
 </script>
 
 <template>
@@ -35,12 +35,12 @@ const suggestions = computed(() => store.suggestionsPour(evenement.value))
     <div class="page haut">
       <article class="evenement">
         <div class="visuel">
-          <img :src="evenement.image" alt="" />
+          <img :src="event.image" alt="" />
           <div class="degrade"></div>
 
           <div class="visuel-bas" aria-hidden="true">
-            <p class="visuel-type">{{ evenement.type }}</p>
-            <p class="visuel-titre">{{ evenement.titre }}</p>
+            <p class="visuel-type">{{ event.type }}</p>
+            <p class="visuel-titre">{{ event.titre }}</p>
           </div>
         </div>
 
@@ -48,18 +48,18 @@ const suggestions = computed(() => store.suggestionsPour(evenement.value))
           <div class="resume">
             <div class="resume-haut">
               <div class="categorie">
-                <p class="categorie-type">{{ evenement.type }}</p>
-                <p v-if="evenement.zone">{{ evenement.zone }}</p>
+                <p class="categorie-type">{{ event.type }}</p>
+                <p v-if="event.zone">{{ event.zone }}</p>
               </div>
               <BoutonFavori :taille="32" />
             </div>
 
             <div class="titre-date">
-              <h1>{{ evenement.titre }}</h1>
+              <h1>{{ event.titre }}</h1>
               <p>{{ quand }}</p>
             </div>
 
-            <p>{{ accroche }}</p>
+            <p>{{ intro }}</p>
           </div>
 
           <a href="#" class="bouton bouton-primaire bouton-artiste">À propos de l'artiste</a>
@@ -71,18 +71,18 @@ const suggestions = computed(() => store.suggestionsPour(evenement.value))
       <div class="info-contenu">
         <div class="description">
           <h2>Description</h2>
-          <p>{{ evenement.description }}</p>
+          <p>{{ event.description }}</p>
         </div>
 
         <div class="informations">
           <div class="bloc-info">
             <h2>Informations</h2>
-            <p v-if="artistes.length > 0">Artiste : {{ nomsArtistes }}</p>
-            <p class="categorie-type">Type : {{ evenement.type }}</p>
+            <p v-if="artists.length > 0">Artiste : {{ artistNames }}</p>
+            <p class="categorie-type">Type : {{ event.type }}</p>
           </div>
           <div class="bloc-info">
             <h3>Emplacement :</h3>
-            <p>{{ evenement.lieu }}</p>
+            <p>{{ event.lieu }}</p>
           </div>
         </div>
       </div>

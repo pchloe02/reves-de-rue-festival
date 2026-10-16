@@ -16,7 +16,7 @@ const date = jourEtMois(props.evenement.date)
 <template>
   <RouterLink :to="{ name: 'evenement', params: { id: evenement.id } }" class="petite-carte">
     <div class="image">
-      <img :src="evenement.image" alt="" />
+      <img v-if="evenement.image" :src="evenement.image" alt="" />
       <div class="date">
         <span class="date-jour">{{ date.jour }}</span>
         <span class="date-mois">{{ date.mois }}</span>
