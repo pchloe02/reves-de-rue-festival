@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 
-import { getAllEvents } from '../api/evenements.ts'
+import { getAllEvents } from '../api/events.ts'
 
 export function useEvents() {
   const events = ref([])

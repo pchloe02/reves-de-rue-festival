@@ -1,26 +1,26 @@
 export interface PracticalInfo {
-  titre: string;
-  texte: string;
+  title: string;
+  text: string;
 }
 
 export interface Partner {
-  nom: string;
+  name: string;
   logo: string;
 }
 
 export interface SocialNetwork {
-  nom: string;
-  lien: string;
+  name: string;
+  link: string;
 }
 
 export interface Festival {
-  nom: string;
+  name: string;
   dates: string;
-  lieu: string;
+  location: string;
   image: string;
   description: string;
-  infosPratiques: PracticalInfo[];
-  carte: string;
-  partenaires: Partner[];
-  reseaux: SocialNetwork[];
+  practicalInfo: PracticalInfo[];
+  map: string;
+  partners: Partner[];
+  socialNetworks: SocialNetwork[];
 }

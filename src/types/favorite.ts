@@ -1,5 +1,5 @@
 export interface Favorite {
   id_event: number;
-  id_user: number;
+  id_user: string;
   timestamp: string;
 }

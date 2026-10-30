@@ -2,30 +2,30 @@
 import { computed } from 'vue'
 
 const props = defineProps({
-  intervenant: {
+  intervener: {
     type: Object,
     required: true,
   },
 })
 
 const roleLabel = computed(() => {
-  return props.intervenant.role === 'artist' ? 'Artiste' : 'Exposant'
+  return props.intervener.role === 'artist' ? 'Artist' : 'Exposant'
 })
 </script>
 
 <template>
   <article class="petite-carte">
     <div class="image" aria-hidden="true">
-      <span>{{ intervenant.nom.charAt(0) }}</span>
+      <span>{{ intervener.name.charAt(0) }}</span>
     </div>
     <div class="infos">
       <p class="role">{{ roleLabel }}</p>
-      <h3>{{ intervenant.nom }}</h3>
-      <p v-if="intervenant.discipline" class="discipline">
-        {{ intervenant.discipline }}
+      <h3>{{ intervener.name }}</h3>
+      <p v-if="intervener.discipline" class="discipline">
+        {{ intervener.discipline }}
       </p>
-      <p v-if="intervenant.description" class="description">
-        {{ intervenant.description }}
+      <p v-if="intervener.description" class="description">
+        {{ intervener.description }}
       </p>
     </div>
   </article>

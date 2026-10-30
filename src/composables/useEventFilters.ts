@@ -1,28 +1,30 @@
 import { computed, ref } from 'vue'
 
-export function useEventFilters(events, getArtistsForEvent) {
+export function useEventFilters(events, getIntervenersForEvent) {
   const filters = ref({
     date: '',
     search: '',
   })
 
+
+  // Keep sorting here so every consumer receives events in the same order.
   const sortedEvents = computed(() => {
     return [...events.value].sort((a, b) => {
-      const dateA = a.date + ' ' + a.heureDebut
-      const dateB = b.date + ' ' + b.heureDebut
+      const dateA = a.date + ' ' + a.startTime
+      const dateB = b.date + ' ' + b.startTime
       return dateA.localeCompare(dateB)
     })
   })
 
-  const dates = computed(() => {
-    const availableDates = []
+  const availableDates = computed(() => {
+    const dates = []
     for (let i = 0; i < sortedEvents.value.length; i++) {
       const date = sortedEvents.value[i].date
-      if (!availableDates.includes(date)) {
-        availableDates.push(date)
+      if (!dates.includes(date)) {
+        dates.push(date)
       }
     }
-    return availableDates
+    return dates
   })
 
   const filteredEvents = computed(() => {
@@ -34,15 +36,17 @@ export function useEventFilters(events, getArtistsForEvent) {
     if (filters.value.search !== '') {
       const searchTerm = filters.value.search.toLowerCase()
       result = result.filter((event) => {
-        const artistNames = getArtistsForEvent(event).map((artist) => artist.nom).join(' ')
+        const intervenerNames = getIntervenersForEvent(event)
+          .map((intervener) => intervener.name)
+          .join(' ')
         const text = (
-          event.titre +
+          event.title +
           ' ' +
           event.type +
           ' ' +
-          event.lieu +
+          event.location +
           ' ' +
-          artistNames
+          intervenerNames
         ).toLowerCase()
         return text.includes(searchTerm)
       })
@@ -70,7 +74,7 @@ export function useEventFilters(events, getArtistsForEvent) {
 
   return {
     filters,
-    dates,
+    dates: availableDates,
     sortedEvents,
     filteredEvents,
     eventsByDay,

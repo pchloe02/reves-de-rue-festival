@@ -1,46 +1,51 @@
 <script setup>
+import { computed } from 'vue'
 import TypeTag from './TypeTag.vue'
-import BoutonFavori from './BoutonFavori.vue'
-import { jourEtMois, formaterHeure } from '../helpers.js'
+import BoutonFavori from '../favorites/BoutonFavori.vue'
+import { getDayMonth, formatTime } from '../../utils/helpers.ts'
 
 const props = defineProps({
-  evenement: {
+  event: {
     type: Object,
     required: true,
   },
 })
 
-const date = jourEtMois(props.evenement.date)
+const date = getDayMonth(props.event.date)
+const intervenerNames = computed(() => {
+  return (props.event.interveners ?? []).map((intervener) => intervener.name).join(', ')
+})
 </script>
 
 <template>
-  <RouterLink :to="{ name: 'evenement', params: { id: evenement.id } }" class="carte">
+  <RouterLink :to="{ name: 'event', params: { id: event.id } }" class="carte">
     <div class="image">
-      <img v-if="evenement.image" :src="evenement.image" alt="" />
+      <img v-if="event.image" :src="event.image" alt="" />
       <div class="date">
-        <span class="date-jour">{{ date.jour }}</span>
-        <span class="date-mois">{{ date.mois }}</span>
+        <span class="date-jour">{{ date.day }}</span>
+        <span class="date-mois">{{ date.month }}</span>
       </div>
     </div>
 
     <div class="infos">
-      <TypeTag :type="evenement.type" />
-      <h3>{{ evenement.titre }}</h3>
-      <p class="description">{{ evenement.description }}</p>
+      <TypeTag :type="event.type" />
+      <h3>{{ event.title }}</h3>
+      <p v-if="intervenerNames" class="interveners">Intervener(s) : {{ intervenerNames }}</p>
+      <p class="description">{{ event.description }}</p>
 
       <p class="ligne">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
           <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
           <circle cx="12" cy="10" r="3" />
         </svg>
-        {{ evenement.lieu }}
+        {{ event.location }}
       </p>
       <p class="ligne">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
           <circle cx="12" cy="12" r="10" />
           <path d="M12 6v6l4 2" />
         </svg>
-        {{ formaterHeure(evenement.heureDebut) }}
+        {{ formatTime(event.startTime) }}
       </p>
     </div>
 
@@ -48,7 +53,7 @@ const date = jourEtMois(props.evenement.date)
       <svg class="chevron" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
         <path d="m9 18 6-6-6-6" />
       </svg>
-      <BoutonFavori />
+      <BoutonFavori :event-id="event.id" />
     </div>
   </RouterLink>
 </template>

@@ -1,5 +1,5 @@
 <script setup>
-import { formaterDateBouton } from '../../helpers.js'
+import { formatDateButton } from '../../utils/helpers.ts'
 
 const props = defineProps({
   filters: {
@@ -38,7 +38,7 @@ function handleSearchInput(event) {
         :aria-pressed="filters.date === d"
         @click="handleDateClick(d)"
       >
-        {{ formaterDateBouton(d) }}
+        {{ formatDateButton(d) }}
       </button>
     </div>
 

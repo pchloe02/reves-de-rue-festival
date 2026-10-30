@@ -1,3 +1,5 @@
+import type { Intervener } from './Intervener';
+
 export interface Event {
   id_event: number;
   id_type: number;
@@ -12,17 +14,17 @@ export type EventType = 'fresque live' | 'atelier participatif' | 'performance';
 
 export interface FestivalEvent {
   id: number;
-  titre: string;
+  title: string;
   type: EventType;
   date: string;
-  heureDebut: string;
-  duree: number;
-  lieu: string;
-  zone: string;
+  startTime: string;
+  duration: number;
+  location: string;
+  area: string;
   image: string;
   description: string;
-  artistes: number[];
-  phare: boolean;
+  interveners: Intervener[];
+  featured: boolean;
 }
 
 export interface EventsByDay {

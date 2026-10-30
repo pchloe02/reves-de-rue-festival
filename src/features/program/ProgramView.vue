@@ -1,24 +1,18 @@
 <script setup>
-import { onMounted, watch } from 'vue'
-import EventCard from '../../components/EventCard.vue'
-import EventFilters from './EventFilters.vue'
-import ChoixVue from './ChoixVue.vue'
-import { useEventsStore } from '../../stores/evenements.js'
-import { formaterDateLongue } from '../../helpers.js'
+import { ref } from "vue";
+import EventCard from "../../components/events/EventCard.vue";
+import EventFilters from "../../components/events/EventFilters.vue";
+import ViewSelector from "./ViewSelector.vue";
+import { useEvents } from "../../composables/useEvents.ts";
+import { useEventFilters } from "../../composables/useEventFilters.ts";
+import { formatLongDate } from "../../utils/helpers.ts";
 
-const store = useEventsStore()
+const viewMode = ref("liste");
+const { events, isLoading, error, fetchEvents } = useEvents();
+const { filters, dates, filteredEvents, eventsByDay, updateFilter } =
+  useEventFilters(events, (event) => event.interveners);
 
-onMounted(() => {
-  console.log('[Programming] filtered events:', store.filteredEvents)
-})
-
-watch(
-  () => store.filteredEvents,
-  (events) => {
-    console.log('[Programming] filtered events:', events)
-  },
-  { deep: true },
-)
+fetchEvents();
 </script>
 
 <template>
@@ -28,26 +22,42 @@ watch(
       <p>Retrouvez tous les événements du festival, jour par jour.</p>
     </section>
 
-    <EventFilters :filters="store.filters" :dates="store.dates" @update="store.updateFilter" />
+    <EventFilters
+      :filters="filters"
+      :dates="dates"
+      @update="updateFilter"
+    />
 
-    <p v-if="store.error" class="erreur">{{ store.error }}</p>
-    <p v-else-if="store.isLoading" class="erreur">Chargement des événements…</p>
+    <p v-if="error" class="erreur">{{ error }}</p>
+    <p v-else-if="isLoading" class="erreur">Chargement des événements…</p>
 
     <div class="barre">
-      <ChoixVue v-model="store.viewMode" />
+      <ViewSelector v-model="viewMode" />
     </div>
 
-    <div v-if="store.viewMode === 'liste'" class="liste">
-      <EventCard v-for="event in store.filteredEvents" :key="event.id" :evenement="event" />
+    <div v-if="viewMode === 'liste'" class="liste">
+      <EventCard
+        v-for="event in filteredEvents"
+        :key="event.id"
+        :event="event"
+      />
     </div>
 
     <div v-else>
-      <section v-for="group in store.eventsByDay" :key="group.date" class="jour">
-        <h2 class="pastille-jour">{{ formaterDateLongue(group.date) }}</h2>
+      <section
+        v-for="group in eventsByDay"
+        :key="group.date"
+        class="jour"
+      >
+        <h2 class="pastille-jour">{{ formatLongDate(group.date) }}</h2>
         <div class="frise">
-          <div v-for="event in group.events" :key="event.id" class="frise-element">
+          <div
+            v-for="event in group.events"
+            :key="event.id"
+            class="frise-element"
+          >
             <span class="rond"></span>
-            <EventCard :evenement="event" />
+            <EventCard :event="event" />
           </div>
         </div>
       </section>

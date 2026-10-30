@@ -3,18 +3,18 @@ import { mount } from '@vue/test-utils'
 import EventCard from './EventCard.vue'
 
 // ARRANGE: préparer ma donnée de test
-const evenement = {
+const event = {
   id: 1,
-  titre: 'Fresque en direct',
+  title: 'Fresque en direct',
   type: 'fresque live',
   date: '2026-09-22',
-  heureDebut: '14:00',
-  duree: 90,
-  lieu: 'Place du marché',
+  startTime: '14:00',
+  duration: 90,
+  location: 'Place du marché',
   image: 'https://picsum.photos/seed/test/900/600',
   description: 'Une fresque peinte en direct devant le public.',
-  artistes: [],
-  phare: false,
+  interveners: [],
+  featured: false,
 }
 
 describe('EventCard', () => {
@@ -22,7 +22,7 @@ describe('EventCard', () => {
     // ACT: monter le composant avec la donnée de test
     const wrapper = mount(EventCard, {
       props: {
-        evenement,
+        event,
       },
       global: {
         stubs: { RouterLink: { template: '<a><slot /></a>' } },
@@ -30,17 +30,17 @@ describe('EventCard', () => {
     })
 
     // ASSERT: vérifier que le rendu correspond à ce que j'attends
-    expect(wrapper.text()).toContain(evenement.titre)
-    expect(wrapper.text()).toContain(evenement.lieu)
-    expect(wrapper.text()).toContain(evenement.description)
-    expect(wrapper.text()).toContain(evenement.type)
+    expect(wrapper.text()).toContain(event.title)
+    expect(wrapper.text()).toContain(event.location)
+    expect(wrapper.text()).toContain(event.description)
+    expect(wrapper.text()).toContain(event.type)
   })
 
   it("affiche l'heure formatée", () => {
     // ACT: monter le composant avec la donnée de test
     const wrapper = mount(EventCard, {
       props: {
-        evenement,
+        event,
       },
       global: {
         stubs: { RouterLink: { template: '<a><slot /></a>' } },

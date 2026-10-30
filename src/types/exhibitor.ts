@@ -1,5 +1,5 @@
-import type { Intervenant } from './Intervenant';
+import type { Intervener } from './Intervener';
 
-export interface Exhibitor extends Intervenant {
+export interface Exhibitor extends Intervener {
   role: 'exhibitor';
 }

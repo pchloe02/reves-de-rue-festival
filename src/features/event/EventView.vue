@@ -1,46 +1,83 @@
 <script setup>
-import { computed } from 'vue'
-import EventCardPetite from '../../components/EventCardPetite.vue'
-import BoutonFavori from '../../components/BoutonFavori.vue'
-import { useEventsStore } from '../../stores/evenements.js'
-import { formaterJourMois, formaterHeure, premierePhrase } from '../../helpers.js'
+import { computed, onMounted } from "vue";
+import { useRouter } from "vue-router";
+import EventCardPetite from "../../components/events/EventCardPetite.vue";
+import BoutonFavori from "../../components/favorites/BoutonFavori.vue";
+import { useEvents } from "../../composables/useEvents.ts";
+import { useEvent } from "../../composables/useEvent.ts";
+import {
+  formatDayMonth,
+  formatTime,
+  firstSentence,
+} from "../../utils/helpers.ts";
 
 const props = defineProps({
   id: {
     type: String,
     required: true,
   },
-})
+});
 
-const store = useEventsStore()
+const router = useRouter();
+const { event, isLoading, error, fetchEvent } = useEvent(props.id);
+const { events, fetchEvents } = useEvents();
 
-const event = computed(() => store.findEvent(props.id))
+const interveners = computed(() => event.value?.interveners ?? []);
 
-const artists = computed(() => store.getArtistsForEvent(event.value))
-
-const artistNames = computed(() => artists.value.map((artist) => artist.nom).join(', '))
+const intervenerNames = computed(() =>
+  interveners.value.map((intervener) => intervener.name).join(", "),
+);
 
 const quand = computed(() => {
-  const currentEvent = event.value
-  return formaterJourMois(currentEvent.date) + ' - À partir de ' + formaterHeure(currentEvent.heureDebut)
-})
+  const currentEvent = event.value;
+  if (!currentEvent) return "";
+  return (
+    formatDayMonth(currentEvent.date) +
+    " - À partir de " +
+    formatTime(currentEvent.startTime)
+  );
+});
 
-const intro = computed(() => premierePhrase(event.value.description))
+const intro = computed(() =>
+  event.value ? firstSentence(event.value.description) : "",
+);
 
-const suggestions = computed(() => store.getSuggestions(event.value))
+const suggestions = computed(() => {
+  if (!event.value) return [];
+  const others = events.value
+    .filter((item) => item.id !== event.value.id)
+    .sort((a, b) =>
+      `${a.date} ${a.startTime}`.localeCompare(`${b.date} ${b.startTime}`),
+    );
+  const sameType = others.filter((item) => item.type === event.value.type);
+  const differentType = others.filter((item) => item.type !== event.value.type);
+  return sameType.concat(differentType).slice(0, 5);
+});
+
+onMounted(async () => {
+  await Promise.all([fetchEvent(), fetchEvents()]);
+  if (!event.value && !error.value) {
+    await router.replace({ name: "program" });
+  }
+});
 </script>
 
 <template>
   <main>
-    <div class="page haut">
-      <article class="evenement">
+    <p v-if="error" class="page erreur">{{ error }}</p>
+    <p v-else-if="isLoading || !event" class="page erreur">
+      Chargement de l’événement…
+    </p>
+    <template v-if="event">
+      <div class="page haut">
+      <article class="event">
         <div class="visuel">
           <img :src="event.image" alt="" />
           <div class="degrade"></div>
 
           <div class="visuel-bas" aria-hidden="true">
             <p class="visuel-type">{{ event.type }}</p>
-            <p class="visuel-titre">{{ event.titre }}</p>
+            <p class="visuel-titre">{{ event.title }}</p>
           </div>
         </div>
 
@@ -49,25 +86,27 @@ const suggestions = computed(() => store.getSuggestions(event.value))
             <div class="resume-haut">
               <div class="categorie">
                 <p class="categorie-type">{{ event.type }}</p>
-                <p v-if="event.zone">{{ event.zone }}</p>
+                <p v-if="event.area">{{ event.area }}</p>
               </div>
-              <BoutonFavori :taille="32" />
+              <BoutonFavori :event-id="event.id" :taille="32" />
             </div>
 
             <div class="titre-date">
-              <h1>{{ event.titre }}</h1>
+              <h1>{{ event.title }}</h1>
               <p>{{ quand }}</p>
             </div>
 
             <p>{{ intro }}</p>
           </div>
 
-          <a href="#" class="bouton bouton-primaire bouton-artiste">À propos de l'artiste</a>
+          <a href="#" class="bouton bouton-primaire bouton-artist"
+            >À propos de l'artist</a
+          >
         </div>
       </article>
-    </div>
+      </div>
 
-    <section class="info-section">
+      <section class="info-section">
       <div class="info-contenu">
         <div class="description">
           <h2>Description</h2>
@@ -77,28 +116,35 @@ const suggestions = computed(() => store.getSuggestions(event.value))
         <div class="informations">
           <div class="bloc-info">
             <h2>Informations</h2>
-            <p v-if="artists.length > 0">Artiste : {{ artistNames }}</p>
+            <p v-if="interveners.length > 0">
+              Intervener : {{ intervenerNames }}
+            </p>
             <p class="categorie-type">Type : {{ event.type }}</p>
           </div>
           <div class="bloc-info">
             <h3>Emplacement :</h3>
-            <p>{{ event.lieu }}</p>
+            <p>{{ event.location }}</p>
           </div>
         </div>
       </div>
-    </section>
+      </section>
 
-    <div class="page">
-      <section class="suggestions">
+      <div class="page">
+        <section class="suggestions">
         <div class="suggestions-titre">
           <h2>Suggestions</h2>
           <RouterLink to="/programmation">Voir plus →</RouterLink>
         </div>
         <div class="defilement">
-          <EventCardPetite v-for="s in suggestions" :key="s.id" :evenement="s" />
+          <EventCardPetite
+            v-for="s in suggestions"
+            :key="s.id"
+            :event="s"
+          />
         </div>
-      </section>
-    </div>
+        </section>
+      </div>
+    </template>
   </main>
 </template>
 
@@ -106,7 +152,7 @@ const suggestions = computed(() => store.getSuggestions(event.value))
 .haut {
   padding-bottom: var(--spacing-800);
 }
-.evenement {
+.event {
   display: flex;
   gap: var(--spacing-1000);
   padding-top: var(--spacing-800);
@@ -132,7 +178,12 @@ const suggestions = computed(() => store.getSuggestions(event.value))
 .degrade {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.15) 50%, rgba(0, 0, 0, 0));
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.7),
+    rgba(0, 0, 0, 0.15) 50%,
+    rgba(0, 0, 0, 0)
+  );
 }
 .visuel-bas {
   position: relative;
@@ -190,7 +241,7 @@ const suggestions = computed(() => store.getSuggestions(event.value))
   flex-direction: column;
   gap: var(--spacing-150);
 }
-.titre-date {
+.title-date {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-150);
@@ -201,7 +252,7 @@ h1 {
   font-size: var(--font-size-heading-1);
   font-weight: var(--font-weight-bold);
 }
-.bouton-artiste {
+.bouton-artist {
   margin-top: auto;
   align-self: flex-start;
 }
@@ -291,7 +342,7 @@ h1 {
 }
 
 @media (max-width: 900px) {
-  .evenement {
+  .event {
     flex-direction: column;
     padding-top: var(--spacing-600);
   }

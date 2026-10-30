@@ -8,7 +8,7 @@
     <nav class="sections">
       <RouterLink to="/programmation">Programme</RouterLink>
       <a href="#">Infos pratiques</a>
-      <a href="#">Favoris</a>
+      <RouterLink to="/favoris">Favoris</RouterLink>
       <a href="#">Association</a>
     </nav>
 

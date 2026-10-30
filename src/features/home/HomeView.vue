@@ -1,19 +1,18 @@
 <script setup>
 import { onMounted, ref } from "vue";
-import IntervenantCardPetite from "../../components/IntervenantCardPetite.vue";
-import { useEventsStore } from "../../stores/evenements.js";
-import { getAllIntervenants } from "../../api/intervenants.ts";
+import IntervenerCardSmall from "../../components/events/IntervenerCardSmall.vue";
+import { getAllInterveners } from "../../api/interveners.ts";
+import festival from "../../data/festival.json";
 
-const store = useEventsStore();
-const intervenants = ref([]);
-const erreurIntervenants = ref("");
+const interveners = ref([]);
+const intervenersError = ref("");
 
 onMounted(async () => {
   try {
-    intervenants.value = await getAllIntervenants();
+    interveners.value = await getAllInterveners();
   } catch (error) {
-    console.error("Erreur lors de la récupération des intervenants :", error);
-    erreurIntervenants.value = "Les intervenants sont momentanément indisponibles.";
+    console.error("Erreur lors de la récupération des interveners :", error);
+    intervenersError.value = "Les interveners sont momentanément indisponibles.";
   }
 });
 </script>
@@ -21,13 +20,13 @@ onMounted(async () => {
 <template>
   <main>
     <section class="hero">
-      <img :src="store.festival.image" alt="" class="hero-image" />
+      <img :src="festival.image" alt="" class="hero-image" />
       <div class="hero-texte">
-        <h1>{{ store.festival.nom }}</h1>
+        <h1>{{ festival.name }}</h1>
         <p class="hero-infos">
-          <span>{{ store.festival.dates }}</span>
+          <span>{{ festival.dates }}</span>
           <span>-</span>
-          <span>{{ store.festival.lieu }}</span>
+          <span>{{ festival.location }}</span>
         </p>
         <div class="hero-boutons">
           <RouterLink to="/programmation" class="bouton bouton-hero"
@@ -43,12 +42,12 @@ onMounted(async () => {
         <h2>Au programme</h2>
         <RouterLink to="/programmation">Voir plus →</RouterLink>
       </div>
-      <p v-if="erreurIntervenants" class="erreur">{{ erreurIntervenants }}</p>
+      <p v-if="intervenersError" class="erreur">{{ intervenersError }}</p>
       <div v-else class="defilement">
-        <IntervenantCardPetite
-          v-for="intervenant in intervenants"
-          :key="intervenant.id_intervenant"
-          :intervenant="intervenant"
+        <IntervenerCardSmall
+          v-for="intervener in interveners"
+          :key="intervener.id_intervener"
+          :intervener="intervener"
         />
       </div>
     </section>
@@ -57,13 +56,13 @@ onMounted(async () => {
       <div class="infos-contenu">
         <div class="infos-texte">
           <h2>Infos pratiques</h2>
-          <p v-for="info in store.festival.infosPratiques" :key="info.titre">
-            {{ info.titre }} : {{ info.texte }}
+          <p v-for="info in festival.practicalInfo" :key="info.title">
+            {{ info.title }} : {{ info.text }}
           </p>
         </div>
         <iframe
           class="carte"
-          :src="store.festival.carte"
+          :src="festival.map"
           title="Carte du lieu du festival"
           loading="lazy"
         ></iframe>
