@@ -6,8 +6,9 @@ import ViewSelector from "./ViewSelector.vue";
 import { useEvents } from "../../composables/useEvents.ts";
 import { useEventFilters } from "../../composables/useEventFilters.ts";
 import { formatLongDate } from "../../utils/helpers.ts";
+import { LIST_VIEW_MODE } from "../../constants/view-modes";
 
-const viewMode = ref("liste");
+const viewMode = ref(LIST_VIEW_MODE);
 const { events, isLoading, error, fetchEvents } = useEvents();
 const { filters, dates, filteredEvents, eventsByDay, updateFilter } =
   useEventFilters(events, (event) => event.interveners);
@@ -35,7 +36,7 @@ fetchEvents();
       <ViewSelector v-model="viewMode" />
     </div>
 
-    <div v-if="viewMode === 'liste'" class="liste">
+    <div v-if="viewMode === LIST_VIEW_MODE" class="liste">
       <EventCard
         v-for="event in filteredEvents"
         :key="event.id"

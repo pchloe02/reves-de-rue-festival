@@ -13,7 +13,6 @@ export function useEvents() {
 
     try {
       events.value = await getAllEvents()
-      console.log('[Events composable] events loaded:', events.value)
     } catch (caughtError) {
       error.value = 'Les événements sont momentanément indisponibles.'
       console.error('Error while fetching events:', caughtError)

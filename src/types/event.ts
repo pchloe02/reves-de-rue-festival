@@ -1,4 +1,4 @@
-import type { Intervener } from './Intervener';
+import type { Intervener } from './intervener';
 
 export interface Event {
   id_event: number;
@@ -8,14 +8,22 @@ export interface Event {
   end_date: string | null;
   description: string | null;
   location: string | null;
+  image_url: string | null;
 }
 
-export type EventType = 'fresque live' | 'atelier participatif' | 'performance';
+export type EventType =
+  | 'Fresque live'
+  | 'Stencil Pochoir'
+  | 'Light painting'
+  | 'Mapping 3d'
+  | 'Calligraffiti'
+  | 'Nourriture'
+  | 'Pop-up store';
 
 export interface FestivalEvent {
   id: number;
   title: string;
-  type: EventType;
+  type: EventType | null;
   date: string;
   startTime: string;
   duration: number;

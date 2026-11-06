@@ -4,6 +4,7 @@ import {
   getFavoriteEventIds,
   removeFavorite,
 } from '../api/favorites.ts'
+import { useToast } from './useToast'
 
 const favorites = ref(new Set())
 const error = ref('')
@@ -28,6 +29,7 @@ function initialize() {
 
 export function useFavorites() {
   initialize()
+  const { showSuccess, showError } = useToast()
 
   function isFavorite(eventId) {
     return favorites.value.has(Number(eventId))
@@ -54,8 +56,10 @@ export function useFavorites() {
     try {
       if (wasFavorite) {
         await removeFavorite(id)
+        showSuccess('Événement retiré des favoris.')
       } else {
         await addFavorite(id)
+        showSuccess('Événement ajouté aux favoris.')
       }
     } catch (caughtError) {
       const restoredFavorites = new Set(favorites.value)
@@ -66,6 +70,7 @@ export function useFavorites() {
       }
       favorites.value = restoredFavorites
       error.value = 'Impossible de modifier ce favori.'
+      showError(error.value)
       console.error('Erreur lors de la modification du favori :', caughtError)
     } finally {
       isLoading.value = false

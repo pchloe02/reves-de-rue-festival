@@ -46,7 +46,7 @@ onMounted(async () => {
       <div v-else class="defilement">
         <IntervenerCardSmall
           v-for="intervener in interveners"
-          :key="intervener.id_intervener"
+          :key="intervener.id_intervenant"
           :intervener="intervener"
         />
       </div>

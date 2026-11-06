@@ -9,7 +9,9 @@
       <RouterLink to="/programmation">Programme</RouterLink>
       <a href="#">Infos pratiques</a>
       <RouterLink to="/favoris">Favoris</RouterLink>
-      <a href="#">Association</a>
+      <a href="https://troi3.fr/" target="_blank" rel="noopener noreferrer"
+        >Association</a
+      >
     </nav>
 
     <a href="#" class="bouton bouton-primaire">Billetterie</a>

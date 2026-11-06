@@ -1,8 +1,9 @@
 import { ref } from 'vue'
 import { getEventById } from '../api/events.ts'
+import type { FestivalEvent } from '../types'
 
-export function useEvent(id) {
-  const event = ref(null)
+export function useEvent(id: string) {
+  const event = ref<FestivalEvent | null>(null)
   const isLoading = ref(false)
   const error = ref('')
 

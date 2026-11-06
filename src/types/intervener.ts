@@ -1,4 +1,4 @@
-export type IntervenerRole = "artist" | "exhibitor" | "Autre";
+export type IntervenerRole = "artist" | "exhibitor" | "other";
 
 export interface Intervener {
   id_intervenant: number;

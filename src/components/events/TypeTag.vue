@@ -1,4 +1,10 @@
 <script setup>
+import {
+  ATELIER_EVENT_TYPES,
+  FRESQUE_EVENT_TYPES,
+  PERFORMANCE_EVENT_TYPES,
+} from "../../constants/event-types";
+
 defineProps({
   type: String,
 })
@@ -6,11 +12,12 @@ defineProps({
 
 <template>
   <span
+    v-if="type"
     class="tag"
     :class="{
-      'tag-fresque': type === 'fresque live',
-      'tag-performance': type === 'performance',
-      'tag-atelier': type === 'atelier participatif',
+      'tag-fresque': FRESQUE_EVENT_TYPES.includes(type),
+      'tag-performance': PERFORMANCE_EVENT_TYPES.includes(type),
+      'tag-atelier': ATELIER_EVENT_TYPES.includes(type),
     }"
   >
     {{ type }}

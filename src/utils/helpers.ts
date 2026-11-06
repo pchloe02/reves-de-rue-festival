@@ -1,5 +1,4 @@
-const months = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre']
-const shortMonths = ['JAN', 'FÉV', 'MAR', 'AVR', 'MAI', 'JUIN', 'JUIL', 'AOÛT', 'SEP', 'OCT', 'NOV', 'DÉC']
+import { MONTHS, SHORT_MONTHS } from "../constants/date";
 
 function toDate(dateText) {
   return new Date(dateText + 'T00:00:00')
@@ -7,7 +6,7 @@ function toDate(dateText) {
 
 export function formatDayMonth(dateText) {
   const date = toDate(dateText)
-  return date.getDate() + ' ' + months[date.getMonth()]
+  return date.getDate() + ' ' + MONTHS[date.getMonth()]
 }
 
 export function formatLongDate(dateText) {
@@ -17,7 +16,7 @@ export function formatLongDate(dateText) {
 
 export function formatDateButton(dateText) {
   const date = toDate(dateText)
-  return date.getDate() + ' ' + months[date.getMonth()].slice(0, 4) + ' ' + date.getFullYear()
+  return date.getDate() + ' ' + MONTHS[date.getMonth()].slice(0, 4) + ' ' + date.getFullYear()
 }
 
 export function getDayMonth(dateText) {
@@ -26,7 +25,7 @@ export function getDayMonth(dateText) {
   if (day.length === 1) {
     day = '0' + day
   }
-  return { day, month: shortMonths[date.getMonth()] }
+  return { day, month: SHORT_MONTHS[date.getMonth()] }
 }
 
 export function formatTime(time) {

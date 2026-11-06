@@ -1,8 +1,10 @@
 <script setup>
+import { DAY_VIEW_MODE, LIST_VIEW_MODE } from '../../constants/view-modes'
+
 defineProps({
   modelValue: {
     type: String,
-    default: 'liste',
+    default: LIST_VIEW_MODE,
   },
 })
 
@@ -12,10 +14,10 @@ const emit = defineEmits(['update:modelValue'])
 <template>
   <div class="choix-vue" role="group" aria-label="Affichage">
     <button
-      :class="{ actif: modelValue === 'liste' }"
-      :aria-pressed="modelValue === 'liste'"
+      :class="{ actif: modelValue === LIST_VIEW_MODE }"
+      :aria-pressed="modelValue === LIST_VIEW_MODE"
       title="Liste"
-      @click="emit('update:modelValue', 'liste')"
+      @click="emit('update:modelValue', LIST_VIEW_MODE)"
     >
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
         <path d="M4 6h16M4 12h16M4 18h16" />
@@ -23,10 +25,10 @@ const emit = defineEmits(['update:modelValue'])
       <span class="cache">Liste</span>
     </button>
     <button
-      :class="{ actif: modelValue === 'jours' }"
-      :aria-pressed="modelValue === 'jours'"
+      :class="{ actif: modelValue === DAY_VIEW_MODE }"
+      :aria-pressed="modelValue === DAY_VIEW_MODE"
       title="Par jour"
-      @click="emit('update:modelValue', 'jours')"
+      @click="emit('update:modelValue', DAY_VIEW_MODE)"
     >
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
         <path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01" />

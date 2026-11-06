@@ -1,6 +1,7 @@
 import { supabase } from "../utils/supabase";
+import type { User } from "@supabase/supabase-js";
 
-async function getCurrentUser() {
+const getCurrentUser = async (): Promise<User> => {
   const { data: sessionData, error: sessionError } =
     await supabase.auth.getSession();
 
@@ -22,9 +23,9 @@ async function getCurrentUser() {
   }
 
   return data.user;
-}
+};
 
-export async function getFavoriteEventIds(): Promise<number[]> {
+export const getFavoriteEventIds = async (): Promise<number[]> => {
   const user = await getCurrentUser();
   const { data, error } = await supabase
     .from("favorite")
@@ -38,9 +39,9 @@ export async function getFavoriteEventIds(): Promise<number[]> {
   return (data ?? [])
     .map((favorite) => Number(favorite.id_event))
     .filter((id) => Number.isInteger(id));
-}
+};
 
-export async function addFavorite(idEvent: number): Promise<void> {
+export const addFavorite = async (idEvent: number): Promise<void> => {
   const user = await getCurrentUser();
   const { error } = await supabase.from("favorite").upsert(
     {
@@ -54,9 +55,9 @@ export async function addFavorite(idEvent: number): Promise<void> {
   if (error) {
     throw error;
   }
-}
+};
 
-export async function removeFavorite(idEvent: number): Promise<void> {
+export const removeFavorite = async (idEvent: number): Promise<void> => {
   const user = await getCurrentUser();
   const { error } = await supabase
     .from("favorite")
@@ -67,4 +68,4 @@ export async function removeFavorite(idEvent: number): Promise<void> {
   if (error) {
     throw error;
   }
-}
+};

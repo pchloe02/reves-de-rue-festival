@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from 'vue'
+import { INTERVENER_ROLE_LABELS } from '../../constants/interveners'
 
 const props = defineProps({
   intervener: {
@@ -9,7 +10,7 @@ const props = defineProps({
 })
 
 const roleLabel = computed(() => {
-  return props.intervener.role === 'artist' ? 'Artist' : 'Exposant'
+  return INTERVENER_ROLE_LABELS[props.intervener.role] ?? INTERVENER_ROLE_LABELS.other
 })
 </script>
 
